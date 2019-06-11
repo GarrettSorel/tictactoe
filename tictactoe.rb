@@ -1,5 +1,7 @@
 class Game
 
+@@cells = [1,2,3,4,5,6,7,8,9]
+
   def initialize
     @board = GameBoard.new
     @player_1 = "X"
@@ -33,44 +35,55 @@ class Game
         when 1
           @@cells[0] = @current_player
           @board.update
-          @board.turn
+          turn
+          select
         when 2
           @@cells[1] = @current_player
           @board.update
-          @board.turn
+          turn
+          select
         when 3
           @@cells[2] = @current_player
           @board.update
-          @board.turn
+          turn
+          select
         when 4
           @@cells[3] = @current_player
           @board.update
-          @board.turn
+          turn
+          select
         when 5
           @@cells[4] = @current_player
           @board.update
-          @board.turn
+          turn
+          select
         when 6
           @@cells[5] = @current_player
           @board.update
-          @board.turn
+          turn
+          select
         when 7
           @@cells[6] = @current_player
           @board.update
-          @board.turn
+          turn
+          select
         when 8
           @@cells[7] = @current_player
           @board.update
-          @board.turn
+          turn
+          select
         when 9
           @@cells[8] = @current_player
           @board.update
-          @board.turn
+          turn
+          select
         else
           puts "Invalid move. Please enter an available number."
+          select
         end
     else
       puts "That number is selected, please choose another."
+      select
     end
   end
 
@@ -79,7 +92,6 @@ end
 class GameBoard < Game
 
   def initialize
-    @@cells = [1,2,3,4,5,6,7,8,9]
   end
 
   def update
