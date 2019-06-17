@@ -15,6 +15,7 @@ class Game
     puts "-----Player 1 is X and Player 2 is O-----"
     puts "-----Select a number to begin-----"
     puts "-----------------------------------------"
+    puts "Type reset to start a new game or quit to exit"
     @board.update
     select
   end
@@ -28,7 +29,22 @@ class Game
   end
 
   def select
-    selection = gets.chomp.to_i
+
+    puts "#{@current_player}'s Turn \n"
+    selection = gets.chomp
+
+    if @@cells.all?(String)
+      puts "The game is tie!"
+      @board.reset
+    end
+
+    if selection == "reset"
+      @board.reset
+    end
+
+    if selection == "quit"
+      @board.exit
+    end
 
     if @@cells.include?(selection)
       case selection
@@ -81,6 +97,10 @@ class Game
           puts "Invalid move. Please enter an available number."
           select
         end
+    elsif selection == "reset"
+      @board.reset
+    elsif selection == "quit"
+      @board.exit
     else
       puts "That number is selected, please choose another."
       select
@@ -107,7 +127,7 @@ class Game
        (@@cells[0] == "O" && @@cells[4] == "O" && @@cells[8] == "O") ||
        (@@cells[2] == "O" && @@cells[4] == "O" && @@cells[6] == "O")
          puts "O Wins!"
-         @board.reset    
+         @board.reset
     else
       select
     end
@@ -128,6 +148,10 @@ class GameBoard < Game
   def reset
     @@cells = [1,2,3,4,5,6,7,8,9]
     update
+  end
+
+  def exit
+    abort
   end
 
 end
